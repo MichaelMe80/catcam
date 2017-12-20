@@ -14,7 +14,7 @@ if len(sys.argv) != 4:
     print("No args given, trying to use config file")
     try:
         config = configparser.ConfigParser()
-        config.read('config.ini')
+        config.read('/opt/catcam/config.ini')
         MAILFROMADDRESS = config['Mail']['MailFromAddress']
         MAILFROMPASS = config['Mail']['MailFromPass']
         MAILTOADDRESS = config['Mail']['MailToAddress']
