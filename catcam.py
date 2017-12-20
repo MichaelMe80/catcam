@@ -20,6 +20,7 @@ if len(sys.argv) != 4:
         MAILTOADDRESS = config['Mail']['MailToAddress']
     except:
         sys.exit("couldn't read input file")
+    print("config file parsed")
 else:
     MAILFROMADDRESS = sys.argv[1]
     MAILFROMPASS = sys.argv[2]
@@ -31,7 +32,7 @@ GPIO.setup(GPIO_PIR,GPIO.IN)
 
 laststate = 0
 camera = picamera.PiCamera()
-camera.led = False
+#camera.led = False
 #camera.hflip = True
 #camera.vflip = True
 camera.resolution = (640, 480)
