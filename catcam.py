@@ -10,8 +10,7 @@ from catmailer import mailphoto
 
 #checking argv
 if len(sys.argv) < 3:
-    print("usage: 'catcam.py <MAILADDRESS> <MAILPASSWORD>'")
-    exit 
+    sys.exit("usage: 'catcam.py <MAILADDRESS> <MAILPASSWORD>'") 
 
 GPIO.setmode(GPIO.BOARD)
 GPIO_PIR = 12
