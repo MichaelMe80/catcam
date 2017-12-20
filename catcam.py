@@ -44,7 +44,7 @@ def takephoto():
     camera.annotate_text = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S');
 
     filename = BASEDIR + "images/" + datetime.datetime.now().strftime('%Y-%m-%d_%H%M%S') + ".jpg"
-    time.sleep(0.1)
+    time.sleep(0.3)
     camera.capture(filename)
     mailphoto(MAILFROMADDRESS,MAILFROMPASS,MAILTOADDRESS,filename)
 
