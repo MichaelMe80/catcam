@@ -31,12 +31,12 @@ GPIO.setup(GPIO_PIR,GPIO.IN)
 
 laststate = 0
 camera = picamera.PiCamera()
+camera.led = False
 #camera.hflip = True
 #camera.vflip = True
 camera.resolution = (640, 480)
 
 def takephoto():
-    camera.annotate_size = 60
     camera.annotate_foreground = Color('black')
     camera.annotate_background = Color('white')
     camera.annotate_text = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S');
