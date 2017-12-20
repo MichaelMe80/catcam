@@ -8,6 +8,11 @@ import os
 import picamera
 from catmailer import mailphoto
 
+#checking argv
+if len(sys.argv) < 3:
+    print("usage: 'catcam.py <MAILADDRESS> <MAILPASSWORD>'")
+    exit 
+
 GPIO.setmode(GPIO.BOARD)
 GPIO_PIR = 12
 GPIO.setup(GPIO_PIR,GPIO.IN)
