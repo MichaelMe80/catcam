@@ -38,8 +38,8 @@ camera = picamera.PiCamera()
 camera.resolution = (640, 480)
 
 def takephoto():
-    camera.annotate_foreground = Color('black')
-    camera.annotate_background = Color('white')
+    camera.annotate_foreground = picamera.Color('black')
+    camera.annotate_background = picamera.Color('white')
     camera.annotate_text = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S');
 
     camera.capture('/home/pi/image.jpg')
