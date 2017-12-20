@@ -6,18 +6,28 @@ import time
 import datetime
 import os
 import picamera
+import configparser
 from catmailer import mailphoto
 
 #checking argv
-if len(sys.argv) < 3:
-    sys.exit("usage: 'catcam.py <MAILADDRESS> <MAILPASSWORD>'") 
+if len(sys.argv) != 4:
+    print("No args given, trying to use config file")
+    try:
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+        MAILFROMADDRESS = config['Mail']['MailFromAddress']
+        MAILFROMPASS = config['Mail']['MailFromPass']
+        MAILTOADDRESS = config['Mail']['MailToAddress']
+    except:
+        sys.exit("couldn't read input file")
+else:
+    MAILFROMADDRESS = sys.argv[1]
+    MAILFROMPASS = sys.argv[2]
+    MAILTOADDRESS = sys.argv[3]
 
 GPIO.setmode(GPIO.BOARD)
 GPIO_PIR = 12
 GPIO.setup(GPIO_PIR,GPIO.IN)
-
-USER = sys.argv[1]
-PASSWORD = sys.argv[2]
 
 laststate = 0
 camera = picamera.PiCamera()
@@ -26,8 +36,13 @@ camera = picamera.PiCamera()
 camera.resolution = (640, 480)
 
 def takephoto():
+    camera.annotate_size = 60
+    camera.annotate_foreground = Color('black')
+    camera.annotate_background = Color('white')
+    camera.annotate_text = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S');
+
     camera.capture('/home/pi/image.jpg')
-    mailphoto(USER,PASSWORD)
+    mailphoto(MAILFROMADDRESS,MAILFROMPASS,MAILTOADDRESS)
 
 while True:
     newstate = GPIO.input(GPIO_PIR)
